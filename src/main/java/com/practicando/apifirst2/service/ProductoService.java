@@ -25,24 +25,23 @@ public class ProductoService {
     }
 
     public List<Producto> listaProductos(){
-        return repository.listar();
+        return repository.findAll();
     }
 
     public Optional<Producto> actualizarProducto(Long id,
                                                  String nombre,
                                                  int cantidad,
-                                                 double precioUnitario)
-    {
+                                                 double precioUnitario) {
         Producto producto = new Producto(id, nombre, cantidad, precioUnitario);
-        return repository.actualizar(producto);
+        return Optional.of(repository.save(producto));
     }
 
     public Optional<Producto> buscarProducto(Long id){
-        return repository.buscar(id);
+        return repository.findById(id);
     }
 
     public void eliminarProducto(Long id){
-        repository.eliminar(id);
+        repository.deleteById(id);
     }
 
 }

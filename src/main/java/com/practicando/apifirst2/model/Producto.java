@@ -1,18 +1,29 @@
 package com.practicando.apifirst2.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "productos")
 public class Producto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
     private int cantidad;
     private double precioUnitario;
     private double precioFinal;
 
+
     public Producto(Long id, String nombre, int cantidad, double precioUnitario){
+        this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         setPrecioFInal();
     }
+
+    public Producto() {}
 
     public void setId(Long id){
         this.id = id;
@@ -48,7 +59,7 @@ public class Producto {
         return precioFinal;
     }
 
-    public double setPrecioFInal() {
-       return this.precioFinal = this.precioUnitario * this.cantidad;
+    public void setPrecioFInal() {
+        this.precioFinal = this.precioUnitario * this.cantidad;
     }
 }
