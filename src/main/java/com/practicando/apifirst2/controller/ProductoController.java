@@ -1,7 +1,9 @@
 package com.practicando.apifirst2.controller;
 
+import com.practicando.apifirst2.dto.ProductoDto;
 import com.practicando.apifirst2.model.Producto;
 import com.practicando.apifirst2.service.ProductoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class ProductoController {
     }
 
     @PostMapping("/save")
-    public Producto guardarProducto(@RequestBody Producto producto) {
+    public Producto guardarProducto(@Valid @RequestBody ProductoDto producto) {
         return service.guardarProducto(producto.getNombre(), producto.getCantidad(), producto.getPrecioUnitario());
     }
 
@@ -27,7 +29,7 @@ public class ProductoController {
     }
 
     @PutMapping("/update")
-    public Optional<Producto> actualizarProducto(@RequestBody Producto producto) {
+    public Optional<Producto> actualizarProducto(@Valid @RequestBody ProductoDto producto) {
         return service.actualizarProducto(producto.getId(), producto.getNombre(), producto.getCantidad(), producto.getPrecioUnitario());
     }
 
